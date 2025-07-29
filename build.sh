@@ -61,7 +61,7 @@ build_windows() {
     uv run pyinstaller \
         --onefile \
         --windowed \
-        --name pdf_to_image_gui \
+        --name pdf_to_image_gui_windows \
         --distpath dist/windows \
         --workpath build/windows \
         --specpath build/windows \
@@ -71,20 +71,20 @@ build_windows() {
     uv run pyinstaller \
         --onefile \
         --console \
-        --name pdf_to_image_cli \
+        --name pdf_to_image_cli_windows \
         --distpath dist/windows \
         --workpath build/windows \
         --specpath build/windows \
         main.py
     
     echo "Windows版本编译完成！"
-    echo "GUI版本: dist/windows/pdf_to_image_gui.exe"
-    echo "CLI版本: dist/windows/pdf_to_image_cli.exe"
+    echo "GUI版本: dist/windows/pdf_to_image_gui_windows.exe"
+    echo "CLI版本: dist/windows/pdf_to_image_cli_windows.exe"
     
     # 测试编译结果
-    if [ -f "dist/windows/pdf_to_image_cli.exe" ]; then
+    if [ -f "dist/windows/pdf_to_image_cli_windows.exe" ]; then
         echo "正在测试编译结果..."
-        if ./dist/windows/pdf_to_image_cli.exe --help > /dev/null 2>&1; then
+        if ./dist/windows/pdf_to_image_cli_windows.exe --help > /dev/null 2>&1; then
             echo "✓ 测试成功！"
         else
             echo "⚠ 测试失败，但文件已生成"
@@ -103,7 +103,7 @@ build_linux() {
     uv run pyinstaller \
         --onefile \
         --windowed \
-        --name pdf_to_image_gui \
+        --name pdf_to_image_gui_linux \
         --distpath dist/linux \
         --workpath build/linux \
         --specpath build/linux \
@@ -113,31 +113,31 @@ build_linux() {
     uv run pyinstaller \
         --onefile \
         --console \
-        --name pdf_to_image_cli \
+        --name pdf_to_image_cli_linux \
         --distpath dist/linux \
         --workpath build/linux \
         --specpath build/linux \
         main.py
     
     # 重命名文件以移除.exe后缀
-    if [ -f "dist/linux/pdf_to_image_gui.exe" ]; then
-        mv "dist/linux/pdf_to_image_gui.exe" "dist/linux/pdf_to_image_gui"
+    if [ -f "dist/linux/pdf_to_image_gui_linux.exe" ]; then
+        mv "dist/linux/pdf_to_image_gui_linux.exe" "dist/linux/pdf_to_image_gui_linux"
     fi
-    if [ -f "dist/linux/pdf_to_image_cli.exe" ]; then
-        mv "dist/linux/pdf_to_image_cli.exe" "dist/linux/pdf_to_image_cli"
+    if [ -f "dist/linux/pdf_to_image_cli_linux.exe" ]; then
+        mv "dist/linux/pdf_to_image_cli_linux.exe" "dist/linux/pdf_to_image_cli_linux"
     fi
     
     # 设置可执行权限
-    chmod +x dist/linux/pdf_to_image_gui
-    chmod +x dist/linux/pdf_to_image_cli
+    chmod +x dist/linux/pdf_to_image_gui_linux
+    chmod +x dist/linux/pdf_to_image_cli_linux
     
     echo "Linux版本编译完成！"
-    echo "GUI版本: dist/linux/pdf_to_image_gui"
-    echo "CLI版本: dist/linux/pdf_to_image_cli"
+    echo "GUI版本: dist/linux/pdf_to_image_gui_linux"
+    echo "CLI版本: dist/linux/pdf_to_image_cli_linux"
     
     # 测试编译结果
     echo "正在测试编译结果..."
-    if ./dist/linux/pdf_to_image_cli --help > /dev/null 2>&1; then
+    if ./dist/linux/pdf_to_image_cli_linux --help > /dev/null 2>&1; then
         echo "✓ 测试成功！"
     else
         echo "⚠ 测试失败，请检查编译结果"
@@ -155,7 +155,7 @@ build_macos() {
     uv run pyinstaller \
         --onefile \
         --windowed \
-        --name "PDF转图片工具" \
+        --name "PDF转图片工具_macos" \
         --distpath dist/macos \
         --workpath build/macos \
         --specpath build/macos \
@@ -165,34 +165,34 @@ build_macos() {
     uv run pyinstaller \
         --onefile \
         --console \
-        --name pdf_to_image_cli \
+        --name pdf_to_image_cli_macos \
         --distpath dist/macos \
         --workpath build/macos \
         --specpath build/macos \
         main.py
     
     # 重命名文件以移除.exe后缀
-    if [ -f "dist/macos/PDF转图片工具.exe" ]; then
-        mv "dist/macos/PDF转图片工具.exe" "dist/macos/PDF转图片工具"
+    if [ -f "dist/macos/PDF转图片工具_macos.exe" ]; then
+        mv "dist/macos/PDF转图片工具_macos.exe" "dist/macos/PDF转图片工具_macos"
     fi
-    if [ -f "dist/macos/pdf_to_image_cli.exe" ]; then
-        mv "dist/macos/pdf_to_image_cli.exe" "dist/macos/pdf_to_image_cli"
+    if [ -f "dist/macos/pdf_to_image_cli_macos.exe" ]; then
+        mv "dist/macos/pdf_to_image_cli_macos.exe" "dist/macos/pdf_to_image_cli_macos"
     fi
     
     # 设置可执行权限
-    chmod +x dist/macos/pdf_to_image_cli
-    if [ -f "dist/macos/PDF转图片工具" ]; then
-        chmod +x "dist/macos/PDF转图片工具"
+    chmod +x dist/macos/pdf_to_image_cli_macos
+    if [ -f "dist/macos/PDF转图片工具_macos" ]; then
+        chmod +x "dist/macos/PDF转图片工具_macos"
     fi
     
     echo "macOS版本编译完成！"
-    echo "GUI版本: dist/macos/PDF转图片工具"
-    echo "CLI版本: dist/macos/pdf_to_image_cli"
+    echo "GUI版本: dist/macos/PDF转图片工具_macos"
+    echo "CLI版本: dist/macos/pdf_to_image_cli_macos"
     echo "注意: 首次运行可能需要在系统偏好设置中允许运行未签名的应用"
     
     # 测试编译结果
     echo "正在测试编译结果..."
-    if ./dist/macos/pdf_to_image_cli --help > /dev/null 2>&1; then
+    if ./dist/macos/pdf_to_image_cli_macos --help > /dev/null 2>&1; then
         echo "✓ 测试成功！"
     else
         echo "⚠ 测试失败，请检查编译结果"
